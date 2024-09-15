@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Office Prediction</title>
+    <style>
+        /* Resetting some browser defaults */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Form container with card style */
+        .form-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        button:active {
+            background-color: #1e7e34;
+            transform: scale(0.98);
+        }
+
+        /* Prediction result styling */
+        #predictionResult {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #28a745;
+            margin-top: 15px;
+        }
+
+        /* Analytics button */
+        .analyticsbutton {
+            width: 200px;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 20px auto;
+            display: block;
+            text-align: center;
+        }
+
+        .analyticsbutton:hover {
+            background-color: #0056b3;
+        }
+
+        /* Section for data analytics visuals */
+        .section-card {
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: none; /* Initially hidden */
+        }
+
+        .section-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Box Office Prediction</h1>
+
+    <!-- Prediction Form -->
+    <div class="form-card">
+        <form id="predictionForm">
+            <label for="Actor1">Actor 1:</label>
+            <input type="text" id="Actor1" name="Actor1" required>
+
+            <label for="Actor2">Actor 2:</label>
+            <input type="text" id="Actor2" name="Actor2" required>
+
+            <label for="Director">Director:</label>
+            <input type="text" id="Director" name="Director" required>
+
+            <label for="Budget">Budget (INR):</label>
+            <input type="number" id="Budget" name="Budget" required>
+
+            <label for="TheaterCount">Theater Count:</label>
+            <input type="number" id="TheaterCount" name="TheaterCount" required>
+
+            <label for="Popularity">Popularity:</label>
+            <input type="number" step="0.1" id="Popularity" name="Popularity" required>
+
+            <label for="Duration">Duration:</label>
+            <input type="number" step="1" id="Duration" name="Duration" required>
+
+            <button type="button">Predict</button>
+        </form>
+
+        <!-- Predicted result display -->
+        <h2>Predicted Box Office Collection: <span id="predictionResult">N/A</span> INR</h2>
+    </div>
+
+   
+<a href="analytics.html">
+    <button class="analyticsbutton">View Data Analytics</button>
+</a>
+
+
+    <!-- Link to external JavaScript -->
+    <script src="static/js/script.js"></script>
+</body>
+
+</html>
