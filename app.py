@@ -58,6 +58,15 @@ def predict():
         return jsonify({'error': f"Value Error: {str(ve)}"}), 400
     except Exception as e:
         return jsonify({'error': f"Error during prediction: {str(e)}"}), 500
+from flask import make_response
+
+@app.after_request
+def add_header(response):
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, private'
+    response.headers['Expires'] = 0
+    response.headers['Pragma'] = 'no-cache'
+    return response
+
 
 if __name__ == '__main__':
     app.run(debug=True)
