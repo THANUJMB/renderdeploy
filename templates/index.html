@@ -14,26 +14,28 @@
     
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #e0e0e0; 
+            background-color: #000; /* Black background */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             min-height: 100vh;
+            padding: 20px; /* Add padding for smaller screens */
         }
     
         h1, h2 {
-            color: #333;
+            color: #DAA520; /* Dark yellow for text */
             text-align: center;
             margin-bottom: 20px;
+            word-wrap: break-word; /* Allows text to break for smaller screens */
         }
     
         .form-card {
             width: 100%;
             max-width: 400px;
             padding: 20px;
-            background-color: #fff; 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #333; /* Dark background for form card */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             border-radius: 10px;
             margin-bottom: 20px;
         }
@@ -46,22 +48,23 @@
         label {
             font-weight: bold;
             margin-bottom: 5px;
-            color: #333;
+            color: #DAA520; /* Dark yellow for labels */
         }
     
         input[type="text"], input[type="number"] {
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #DAA520; /* Dark yellow border */
             border-radius: 5px;
             margin-bottom: 15px;
             font-size: 16px;
-            background-color: #fff; 
+            background-color: #222; /* Dark background for input */
+            color: #DAA520; /* Dark yellow text */
         }
     
         button {
             padding: 12px;
-            background-color: #28a745;
-            color: white;
+            background-color: #DAA520; /* Dark yellow button */
+            color: #000; /* Black text */
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -72,11 +75,11 @@
         }
     
         button:hover {
-            background-color: #218838;
+            background-color: #B8860B; /* Slightly darker yellow on hover */
         }
     
         button:active {
-            background-color: #1e7e34;
+            background-color: #A0780A; /* Even darker yellow on active */
             transform: scale(0.98);
         }
     
@@ -85,15 +88,15 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
-            color: #28a745;
+            color: #DAA520; /* Dark yellow for the result */
             margin-top: 15px;
         }
     
         .analyticsbutton {
             width: 200px;
             padding: 12px;
-            background-color: #007bff;
-            color: white;
+            background-color: #DAA520; /* Dark yellow button */
+            color: #000; /* Black text */
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -103,16 +106,17 @@
             margin: 20px auto;
             display: block;
             text-align: center;
+            transition: background-color 0.3s ease;
         }
     
         .analyticsbutton:hover {
-            background-color: #0056b3;
+            background-color: #B8860B; /* Slightly darker yellow on hover */
         }
     
         .section-card {
             max-width: 800px;
-            background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #333; /* Dark background for section */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 30px;
@@ -126,16 +130,36 @@
         }
     
         #srn, #myname {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 18px;
+            background-color: #DAA520; /* Dark yellow background */
+            color: #000; /* Black text */
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
             font-weight: bold;
-            color: #333;
+            position: relative; /* Changed to relative positioning */
+            margin-bottom: 10px; /* Add space below the blocks */
+            display: inline-block;
         }
     
-        #myname {
-            top: 40px;
+        /* Adjust layout for small screens */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px; /* Add some padding to the body */
+            }
+    
+            h1, h2 {
+                font-size: 20px; /* Reduce font size for titles */
+            }
+    
+            #srn, #myname {
+                font-size: 12px; /* Smaller text in the blocks */
+                padding: 5px; /* Reduce padding for smaller blocks */
+                display: block; /* Stack blocks vertically */
+            }
+    
+            #myname {
+                margin-top: 5px; /* Add some space between #srn and #myname */
+            }
         }
     </style>
     
