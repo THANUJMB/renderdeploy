@@ -6,162 +6,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Box Office Prediction</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #000; /* Black background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        padding: 20px; /* Add padding for smaller screens */
+    }
+
+    h1, h2 {
+        color: #DAA520; /* Dark yellow for text */
+        text-align: center;
+        margin-bottom: 20px;
+        word-wrap: break-word; /* Allows text to break for smaller screens */
+    }
+
+    .form-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        background-color: #333; /* Dark background for form card */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #DAA520; /* Dark yellow for labels */
+    }
+
+    input[type="text"], input[type="number"] {
+        padding: 10px;
+        border: 1px solid #DAA520; /* Dark yellow border */
+        border-radius: 5px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        background-color: #222; /* Dark background for input */
+        color: #DAA520; /* Dark yellow text */
+    }
+
+    button {
+        padding: 12px;
+        background-color: #DAA520; /* Dark yellow button */
+        color: #000; /* Black text */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #B8860B; /* Slightly darker yellow on hover */
+    }
+
+    button:active {
+        background-color: #A0780A; /* Even darker yellow on active */
+        transform: scale(0.98);
+    }
+
+    #predictionResult {
+        display: block;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        color: #DAA520; /* Dark yellow for the result */
+        margin-top: 15px;
+    }
+
+    .analyticsbutton {
+        width: 200px;
+        padding: 12px;
+        background-color: #DAA520; /* Dark yellow button */
+        color: #000; /* Black text */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .analyticsbutton:hover {
+        background-color: #B8860B; /* Slightly darker yellow on hover */
+    }
+
+    .section-card {
+        max-width: 800px;
+        background-color: #333; /* Dark background for section */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        display: none; /* Initially hidden */
+    }
+
+    .section-card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    #srn, #myname {
+        background-color: #DAA520; /* Dark yellow background */
+        color: #000; /* Black text */
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        position: relative; /* Changed to relative positioning */
+        margin-bottom: 10px; /* Add space below the blocks */
+        display: inline-block;
+    }
+
+    /* Adjust layout for small screens */
+    @media (max-width: 600px) {
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #000; /* Black background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: 20px; /* Add padding for smaller screens */
+            padding: 10px; /* Add some padding to the body */
         }
-    
+
         h1, h2 {
-            color: #DAA520; /* Dark yellow for text */
-            text-align: center;
-            margin-bottom: 20px;
-            word-wrap: break-word; /* Allows text to break for smaller screens */
+            font-size: 20px; /* Reduce font size for titles */
         }
-    
-        .form-card {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            background-color: #333; /* Dark background for form card */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-    
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-    
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #DAA520; /* Dark yellow for labels */
-        }
-    
-        input[type="text"], input[type="number"] {
-            padding: 10px;
-            border: 1px solid #DAA520; /* Dark yellow border */
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 16px;
-            background-color: #222; /* Dark background for input */
-            color: #DAA520; /* Dark yellow text */
-        }
-    
-        button {
-            padding: 12px;
-            background-color: #DAA520; /* Dark yellow button */
-            color: #000; /* Black text */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease;
-        }
-    
-        button:hover {
-            background-color: #B8860B; /* Slightly darker yellow on hover */
-        }
-    
-        button:active {
-            background-color: #A0780A; /* Even darker yellow on active */
-            transform: scale(0.98);
-        }
-    
-        #predictionResult {
-            display: block;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            color: #DAA520; /* Dark yellow for the result */
-            margin-top: 15px;
-        }
-    
-        .analyticsbutton {
-            width: 200px;
-            padding: 12px;
-            background-color: #DAA520; /* Dark yellow button */
-            color: #000; /* Black text */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin: 20px auto;
-            display: block;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-    
-        .analyticsbutton:hover {
-            background-color: #B8860B; /* Slightly darker yellow on hover */
-        }
-    
-        .section-card {
-            max-width: 800px;
-            background-color: #333; /* Dark background for section */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            display: none; /* Initially hidden */
-        }
-    
-        .section-card img {
-            width: 100%;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-    
+
         #srn, #myname {
-            background-color: #DAA520; /* Dark yellow background */
-            color: #000; /* Black text */
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            font-weight: bold;
-            position: relative; /* Changed to relative positioning */
-            margin-bottom: 10px; /* Add space below the blocks */
-            display: inline-block;
+            font-size: 12px; /* Smaller text in the blocks */
+            padding: 5px; /* Reduce padding for smaller blocks */
+            display: block; /* Stack blocks vertically */
         }
-    
-        /* Adjust layout for small screens */
-        @media (max-width: 600px) {
-            body {
-                padding: 10px; /* Add some padding to the body */
-            }
-    
-            h1, h2 {
-                font-size: 20px; /* Reduce font size for titles */
-            }
-    
-            #srn, #myname {
-                font-size: 12px; /* Smaller text in the blocks */
-                padding: 5px; /* Reduce padding for smaller blocks */
-                display: block; /* Stack blocks vertically */
-            }
-    
-            #myname {
-                margin-top: 5px; /* Add some space between #srn and #myname */
-            }
+
+        #myname {
+            margin-top: 5px; /* Add some space between #srn and #myname */
         }
+    }
     </style>
+
     
 </head>
 

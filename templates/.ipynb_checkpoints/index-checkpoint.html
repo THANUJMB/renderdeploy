@@ -6,133 +6,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Box Office Prediction</title>
     <style>
-        /* Resetting some browser defaults */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #000; /* Black background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        padding: 20px; /* Add padding for smaller screens */
+    }
+
+    h1, h2 {
+        color: #DAA520; /* Dark yellow for text */
+        text-align: center;
+        margin-bottom: 20px;
+        word-wrap: break-word; /* Allows text to break for smaller screens */
+    }
+
+    .form-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        background-color: #333; /* Dark background for form card */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #DAA520; /* Dark yellow for labels */
+    }
+
+    input[type="text"], input[type="number"] {
+        padding: 10px;
+        border: 1px solid #DAA520; /* Dark yellow border */
+        border-radius: 5px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        background-color: #222; /* Dark background for input */
+        color: #DAA520; /* Dark yellow text */
+    }
+
+    button {
+        padding: 12px;
+        background-color: #DAA520; /* Dark yellow button */
+        color: #000; /* Black text */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #B8860B; /* Slightly darker yellow on hover */
+    }
+
+    button:active {
+        background-color: #A0780A; /* Even darker yellow on active */
+        transform: scale(0.98);
+    }
+
+    #predictionResult {
+        display: block;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        color: #DAA520; /* Dark yellow for the result */
+        margin-top: 15px;
+    }
+
+    .analyticsbutton {
+        width: 200px;
+        padding: 12px;
+        background-color: #DAA520; /* Dark yellow button */
+        color: #000; /* Black text */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .analyticsbutton:hover {
+        background-color: #B8860B; /* Slightly darker yellow on hover */
+    }
+
+    .section-card {
+        max-width: 800px;
+        background-color: #333; /* Dark background for section */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        display: none; /* Initially hidden */
+    }
+
+    .section-card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    #srn, #myname {
+        background-color: #DAA520; /* Dark yellow background */
+        color: #000; /* Black text */
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        position: relative; /* Changed to relative positioning */
+        margin-bottom: 10px; /* Add space below the blocks */
+        display: inline-block;
+    }
+
+    /* Adjust layout for small screens */
+    @media (max-width: 600px) {
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 100vh;
+            padding: 10px; /* Add some padding to the body */
         }
 
         h1, h2 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: 20px; /* Reduce font size for titles */
         }
 
-        /* Form container with card style */
-        .form-card {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            margin-bottom: 20px;
+        #srn, #myname {
+            font-size: 12px; /* Smaller text in the blocks */
+            padding: 5px; /* Reduce padding for smaller blocks */
+            display: block; /* Stack blocks vertically */
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
+        #myname {
+            margin-top: 5px; /* Add some space between #srn and #myname */
         }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        input[type="text"], input[type="number"] {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        button {
-            padding: 12px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        button:active {
-            background-color: #1e7e34;
-            transform: scale(0.98);
-        }
-
-        /* Prediction result styling */
-        #predictionResult {
-            display: block;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            color: #28a745;
-            margin-top: 15px;
-        }
-
-        /* Analytics button */
-        .analyticsbutton {
-            width: 200px;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin: 20px auto;
-            display: block;
-            text-align: center;
-        }
-
-        .analyticsbutton:hover {
-            background-color: #0056b3;
-        }
-
-        /* Section for data analytics visuals */
-        .section-card {
-            max-width: 800px;
-            background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            display: none; /* Initially hidden */
-        }
-
-        .section-card img {
-            width: 100%;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
+    }
     </style>
+
+    
 </head>
 
 <body>
     <h1>Box Office Prediction</h1>
+    <h2 id=srn>SRN: PES1PG23CA310</h2>
+    <h2 id=myname>NAME: THANUJ M B</h2>
 
     <!-- Prediction Form -->
     <div class="form-card">
@@ -158,7 +195,8 @@
             <label for="Duration">Duration:</label>
             <input type="number" step="1" id="Duration" name="Duration" required>
 
-            <button type="button">Predict</button>
+           <button type="button" onclick="makePrediction()">Predict</button>
+
         </form>
 
         <!-- Predicted result display -->
@@ -166,7 +204,7 @@
     </div>
 
    
-<a href="analytics.html">
+<a href="{{ url_for('analytics') }}">
     <button class="analyticsbutton">View Data Analytics</button>
 </a>
 

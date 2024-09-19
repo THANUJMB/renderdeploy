@@ -8,6 +8,7 @@ async function makePrediction() {
         Popularity: parseFloat(document.getElementById('Popularity').value),
         Duration: parseFloat(document.getElementById('Duration').value)
     };
+    
 
     try {
         const response = await fetch('/predict', {
@@ -20,7 +21,9 @@ async function makePrediction() {
             body: JSON.stringify(formData)
         });
 
+        // Check if the response is OK (status code 200-299)
         if (!response.ok) {
+            // Attempt to parse the error message from the server
             let errorMessage = `HTTP error! status: ${response.status}`;
             try {
                 const errorData = await response.json();
@@ -35,17 +38,16 @@ async function makePrediction() {
 
         const result = await response.json();
 
+        // Check if the prediction is present in the response
         if (result.prediction !== undefined) {
             displayPrediction(result.prediction);
         } else if (result.error) {
+            // Display server-side error message
             alert(`Error from server: ${result.error}`);
         } else {
+            // Handle unexpected response format
             alert('Prediction returned undefined. Please try again.');
         }
-
-        resetForm();  
-        document.getElementById('Actor1').focus();  
-
     } catch (error) {
         console.error('Error:', error);
         alert(`An error occurred: ${error.message}`);
@@ -53,16 +55,5 @@ async function makePrediction() {
 }
 
 function displayPrediction(prediction) {
-    document.getElementById('predictionResult').innerText = prediction !== undefined ? `${prediction} INR` : 'undefined';
-}
-
-function resetForm() {
-    // Clear all input fields for continuous prediction
-    document.getElementById('Actor1').value = '';
-    document.getElementById('Actor2').value = '';
-    document.getElementById('Director').value = '';
-    document.getElementById('Budget').value = '';
-    document.getElementById('TheaterCount').value = '';
-    document.getElementById('Popularity').value = '';
-    document.getElementById('Duration').value = '';
+    document.getElementById('predictionResult').innerText = prediction !== undefined ? `${prediction}` : 'undefined';
 }

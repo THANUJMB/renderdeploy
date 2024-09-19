@@ -39,14 +39,16 @@ def predict():
         actor2_encoded = label_encoders['Actor2'].transform([actor2])[0] if actor2 else 0
         director_encoded = label_encoders['Director'].transform([director])[0] if director else 0
 
-        # Prepare numerical features
-        numerical_features = np.array([budget, theater_count, popularity, duration]).reshape(1, -1)
-        
-        # Scale the numerical features
-        scaled_numerical_features = scaler.transform(numerical_features)
+    
+        # Prepare the features array with both encoded categorical and numerical features
+        numerical_features = np.array([actor1_encoded, actor2_encoded, director_encoded, budget, theater_count, popularity, duration]).reshape(1, -1)
 
-        # Concatenate scaled numerical features with encoded categorical features
-        features = np.hstack((scaled_numerical_features, [[actor1_encoded, actor2_encoded, director_encoded]]))
+        # Scale the features using the scaler
+        scaled_features = scaler.transform(numerical_features)
+
+        # The features are already in the correct form, so there's no need for further concatenation
+        features = scaled_features
+
 
         # Make the prediction using the trained model
         prediction = model.predict(features)
@@ -58,15 +60,6 @@ def predict():
         return jsonify({'error': f"Value Error: {str(ve)}"}), 400
     except Exception as e:
         return jsonify({'error': f"Error during prediction: {str(e)}"}), 500
-from flask import make_response
-
-@app.after_request
-def add_header(response):
-    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, private'
-    response.headers['Expires'] = 0
-    response.headers['Pragma'] = 'no-cache'
-    return response
-
 
 if __name__ == '__main__':
     app.run(debug=True)
